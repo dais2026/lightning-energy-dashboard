@@ -6,7 +6,8 @@ import {
   ScatterChart, Scatter, ZAxis, Cell, LabelList,
   ReferenceLine,
 } from "recharts";
-import { FileText, ChevronDown, ChevronUp, Info, Award, Zap, DollarSign, Shield } from "lucide-react";
+import { FileText, ChevronDown, ChevronUp, Info, Award, Zap, DollarSign, Shield, Download } from "lucide-react";
+import { exportToCSV, exportToJSON, exportToMarkdown } from "@/lib/exportUtils";
 
 // ============================================================
 // LIGHTNING ENERGY — PUBLIC PRESENTATION DESIGN SYSTEM
@@ -675,6 +676,14 @@ function BrochuresSection() {
 /* ─── Main Home page ─── */
 export default function Home() {
   const [selectedBattery, setSelectedBattery] = useState<(typeof batteries)[0] | null>(null);
+  const [exportOpen, setExportOpen] = useState(false);
+
+  const handleExport = (format: 'csv' | 'json' | 'markdown') => {
+    setExportOpen(false);
+    if (format === 'csv') exportToCSV(batteries);
+    else if (format === 'json') exportToJSON(batteries);
+    else exportToMarkdown(batteries);
+  };
 
   return (
     <div className="min-h-screen" style={{ background: "#000000" }}>
@@ -701,6 +710,36 @@ export default function Home() {
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = BORDER; }}>
             File Storage
           </a>
+          {/* Export dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setExportOpen(o => !o)}
+              className="flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-full transition-all"
+              style={{ color: "#000", fontFamily: "'Urbanist', sans-serif", background: AQUA, border: `1px solid ${AQUA}` }}>
+              <Download size={12} />
+              Export
+            </button>
+            {exportOpen && (
+              <div className="absolute right-0 mt-2 w-44 rounded-xl overflow-hidden shadow-2xl z-50"
+                style={{ background: "#111", border: `1px solid ${BORDER}` }}>
+                {([
+                  { label: '📊 CSV Spreadsheet', fmt: 'csv' as const },
+                  { label: '📋 JSON Data', fmt: 'json' as const },
+                  { label: '📝 Markdown Report', fmt: 'markdown' as const },
+                ] as const).map(item => (
+                  <button
+                    key={item.fmt}
+                    onClick={() => handleExport(item.fmt)}
+                    className="w-full text-left px-4 py-2.5 text-xs transition-colors"
+                    style={{ color: WHITE, fontFamily: "'Urbanist', sans-serif" }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "#222"; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.background = "transparent"; }}>
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </nav>
       </header>
 

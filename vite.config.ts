@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin, type ViteDevServer } from "vite";
+import { visualizer } from "rollup-plugin-visualizer";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 // =============================================================================
@@ -150,7 +151,18 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+const isAnalyze = process.env.ANALYZE === "true";
+const plugins = [
+  react(),
+  tailwindcss(),
+  jsxLocPlugin(),
+  vitePluginManusRuntime(),
+  vitePluginManusDebugCollector(),
+  // Bundle visualizer — only active when ANALYZE=true
+  ...(isAnalyze
+    ? [visualizer({ open: true, gzipSize: true, brotliSize: true, filename: "dist/bundle-stats.html" }) as Plugin]
+    : []),
+];
 
 export default defineConfig({
   plugins,
@@ -167,6 +179,18 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        // Split vendor chunks for better caching
+        manualChunks: {
+          "vendor-react": ["react", "react-dom"],
+          "vendor-charts": ["recharts"],
+          "vendor-ui": ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-tabs", "@radix-ui/react-tooltip"],
+          "vendor-trpc": ["@trpc/client", "@trpc/react-query", "@tanstack/react-query"],
+          "vendor-icons": ["lucide-react"],
+        },
+      },
+    },
   },
   server: {
     host: true,

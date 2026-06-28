@@ -1,347 +1,272 @@
-# Lightning Energy Dashboard ⚡
+<div align="center">
 
-> A production-ready solar battery storage comparison and analysis dashboard built with React 19, Node.js, and TypeScript.
+# ⚡ Lightning Energy Dashboard
 
-![Lightning Energy Dashboard](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
-![Node Version](https://img.shields.io/badge/Node-18.x%20%7C%2020.x-blue)
-![React Version](https://img.shields.io/badge/React-19-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)
-![License](https://img.shields.io/badge/License-MIT-green)
+**Solar Battery Storage Comparison & Analysis Platform**
 
-## Overview
+[![Version](https://img.shields.io/badge/version-1.3.1-00EAD3?style=flat-square)](https://github.com/dais2026/lightning-energy-dashboard/releases)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%20|%2020%20|%2022-339933?style=flat-square&logo=node.js)](https://nodejs.org/)
+[![Tests](https://img.shields.io/badge/tests-5%2F5%20passing-brightgreen?style=flat-square)](./server/)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 
-The Lightning Energy Dashboard is a comprehensive web application for comparing, analyzing, and visualizing 11 different solar battery storage systems. It features:
+*Compare 11 premium solar battery systems with interactive charts, export reports, admin dashboard, and analytics — built with production-grade security and infrastructure.*
 
-- **6 Interactive Comparison Charts** with real-time data visualization
-- **Type-Safe API** with end-to-end type safety (tRPC)
-- **Production Security** with Helmet.js and rate limiting
-- **Complete Monitoring** with health checks and metrics
-- **Comprehensive Testing** with unit and E2E tests
-- **Full Documentation** covering security, API, architecture, and deployment
+[**View Repository →**](https://github.com/dais2026/lightning-energy-dashboard) · [**Releases**](https://github.com/dais2026/lightning-energy-dashboard/releases) · [**Report Bug**](https://github.com/dais2026/lightning-energy-dashboard/issues)
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18.x or 20.x LTS
-- npm 9.x or higher
-- Git 2.40+
-- MySQL 8.0+ (for database)
-- AWS Account (for S3 storage)
-
-### Installation
-
-```bash
-# Clone repository
-git clone https://github.com/dais2026/lightning-energy-dashboard.git
-cd lightning-energy-dashboard
-
-# Install dependencies
-npm install --legacy-peer-deps
-
-# Setup environment
-cp .env.example .env.local
-# Edit .env.local with your configuration
-
-# Setup database
-npm run db:push
-
-# Start development server
-npm run dev
-```
-
-The application will be available at `http://localhost:3001`
-
-## 📦 What's Included
-
-### Core Features
-- ✅ Dashboard with 6 battery comparison charts
-- ✅ File management with S3 storage
-- ✅ OAuth authentication (Manus)
-- ✅ Responsive design (mobile, tablet, desktop)
-- ✅ Type-safe API (tRPC)
-- ✅ Database with MySQL/Drizzle ORM
-
-### Production Infrastructure
-- ✅ Security hardening (Helmet.js, rate limiting)
-- ✅ Structured logging (pino-http)
-- ✅ Health checks and metrics endpoints
-- ✅ GitHub Actions CI/CD pipeline
-- ✅ E2E testing with Playwright
-- ✅ Unit testing with Vitest
-
-### Documentation
-- ✅ API Documentation (API.md)
-- ✅ Architecture Guide (ARCHITECTURE.md)
-- ✅ Security Guidelines (SECURITY.md)
-- ✅ Deployment Guide (DEPLOYMENT.md)
-- ✅ Contributing Guidelines (CONTRIBUTING.md)
-- ✅ Performance Guide (PERFORMANCE.md)
-
-## 🏗️ Architecture
-
-```
-Frontend (React 19)
-    ↓
-tRPC API (Type-Safe)
-    ↓
-Backend (Express.js)
-    ↓
-Database (MySQL) + Storage (S3)
-```
-
-### Technology Stack
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 19, Tailwind 4, shadcn/ui, Recharts |
-| **Backend** | Node.js, Express.js, tRPC |
-| **Database** | MySQL 8.0+, Drizzle ORM |
-| **Storage** | AWS S3, Presigned URLs |
-| **Auth** | Manus OAuth, JWT Tokens |
-| **Testing** | Vitest, Playwright |
-| **Build** | Vite, esbuild |
-| **DevOps** | GitHub Actions, Docker-ready |
-
-## 📚 Documentation
-
-- **[API.md](./API.md)** - Complete API reference with examples
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System design and data flows
-- **[SECURITY.md](./SECURITY.md)** - Security guidelines and best practices
-- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Deployment instructions for AWS, DigitalOcean, Docker
-- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - Contributing guidelines
-- **[PERFORMANCE.md](./PERFORMANCE.md)** - Performance optimization guide
-
-## 🧪 Testing
-
-```bash
-# Unit tests
-npm run test                # Run tests
-npm run test -- --watch   # Watch mode
-npm run test:coverage     # Coverage report
-
-# E2E tests
-npm run test:e2e          # Headless mode
-npm run test:e2e:ui       # Interactive UI
-npm run test:e2e:debug    # Debug mode
-
-# Type checking
-npm run check             # TypeScript checking
-
-# Code formatting
-npm run format            # Format code with Prettier
-```
-
-### Test Results
-- ✅ Unit Tests: 5/5 PASSED
-- ✅ E2E Tests: 11 comprehensive tests
-- ✅ TypeScript: Strict mode enabled
-- ✅ Bundle: 931 KB gzipped
-
-## 🔒 Security
-
-The application includes multiple security layers:
-
-- **Helmet.js** for security headers
-- **Rate Limiting** (100 req/15min general, 30 POST, 10 uploads/hour)
-- **Structured Logging** for monitoring
-- **JWT Authentication** in httpOnly cookies
-- **Input Validation** with Zod
-- **HTTPS/TLS** ready with Nginx configuration
-
-See [SECURITY.md](./SECURITY.md) for comprehensive security guidelines.
-
-## 📊 Performance
-
-Current metrics:
-- **Bundle Size**: 931 KB gzipped
-- **Modules**: 2,330 included
-- **Lighthouse Score**: 85+
-- **API Response**: < 200ms average
-- **Database Queries**: < 100ms average
-
-See [PERFORMANCE.md](./PERFORMANCE.md) for optimization strategies.
-
-## 🌐 Available Endpoints
-
-### Health & Monitoring
-```
-GET /health              # System health check
-GET /metrics             # System metrics (memory, uptime)
-```
-
-### API Routes
-```
-POST /api/trpc/auth.me              # Get authenticated user
-POST /api/trpc/auth.logout          # Logout user
-POST /api/trpc/files.list           # List user files
-POST /api/trpc/files.upload         # Upload file to S3
-POST /api/trpc/files.update         # Update file metadata
-POST /api/trpc/files.delete         # Delete file
-```
-
-See [API.md](./API.md) for complete API documentation.
-
-## 🚢 Deployment
-
-### Quick Deploy
-
-**AWS EC2**:
-```bash
-npm install
-npm run build
-NODE_ENV=production npm start
-```
-
-**Docker**:
-```bash
-docker build -t lightning-energy .
-docker run -p 3000:3000 lightning-energy
-```
-
-**DigitalOcean App Platform**:
-- Connect GitHub repository
-- Set environment variables
-- Deploy from Actions
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Required for development:
-```bash
-NODE_ENV=development
-PORT=3001
-DATABASE_URL=mysql://user:pass@localhost:3306/db_name
-JWT_SECRET=your-secret-key
-OAUTH_SERVER_URL=https://oauth.example.com
-AWS_REGION=us-east-1
-```
-
-See `.env.example` for all available options.
-
-## 📝 Scripts
-
-```bash
-npm run dev              # Start development server with HMR
-npm run build            # Build for production
-npm start                # Start production server
-npm run check            # TypeScript type checking
-npm run format           # Format code with Prettier
-npm run test             # Run unit tests
-npm run test:coverage    # Generate coverage report
-npm run test:e2e         # Run E2E tests
-npm test:e2e:ui         # E2E tests with UI
-npm run db:push          # Run database migrations
-```
-
-## 🤝 Contributing
-
-We welcome contributions! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on:
-
-- Setting up development environment
-- Branch naming conventions
-- Commit message format
-- Testing requirements
-- Code style guidelines
-- Submitting pull requests
-
-### Quick Contribution Steps
-
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/your-feature`
-3. Make changes and add tests
-4. Run checks: `npm run check && npm run test && npm run build`
-5. Commit with conventional commits: `git commit -m "feat: add feature"`
-6. Push and create a Pull Request
-
-## 📋 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| Source Files | 121 |
-| Lines of Code | 30,323 |
-| Tests | 16 (5 unit + 11 E2E) |
-| Documentation | 2,500+ lines |
-| Bundle Size | 931 KB gzipped |
-| Dependencies | 708 packages |
-| Node Versions | 18.x, 20.x |
-
-## 🐛 Reporting Issues
-
-Found a bug or have a feature request? Please open an issue using our templates:
-
-- [Bug Report](https://github.com/dais2026/lightning-energy-dashboard/issues/new?template=bug_report.md)
-- [Feature Request](https://github.com/dais2026/lightning-energy-dashboard/issues/new?template=feature_request.md)
-- [Documentation](https://github.com/dais2026/lightning-energy-dashboard/issues/new?template=documentation.md)
-
-**Security Issues**: Please email security@yourdomain.com instead of opening public issues.
-
-## 🔐 Security
-
-For security issues, please email security@yourdomain.com with:
-- Description of vulnerability
-- Steps to reproduce
-- Impact assessment
-- Suggested fix (if available)
-
-See [SECURITY.md](./SECURITY.md) for comprehensive security information.
-
-## 📄 License
-
-This project is licensed under the MIT License - see [LICENSE](./LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [React 19](https://react.dev)
-- Styled with [Tailwind CSS 4](https://tailwindcss.com)
-- Components from [shadcn/ui](https://ui.shadcn.com)
-- Charts with [Recharts](https://recharts.org)
-- API with [tRPC](https://trpc.io)
-- Database with [Drizzle ORM](https://orm.drizzle.team)
-
-## 📞 Support
-
-- **Documentation**: Read the comprehensive guides in the repository
-- **Issues**: Search existing issues or create a new one
-- **Email**: support@yourdomain.com
-- **Discussions**: Start a GitHub discussion for questions
-
-## 🎯 Roadmap
-
-### Phase 4: Production Features
-- [ ] Admin dashboard
-- [ ] Feature flags system
-- [ ] Advanced analytics
-
-### Phase 5: Scaling
-- [ ] Redis caching layer
-- [ ] Message queue system
-- [ ] Microservices architecture
-
-### Phase 6: Integration
-- [ ] GraphQL API
-- [ ] Mobile app (React Native)
-- [ ] Desktop app (Electron)
-
-## 📊 Status
-
-| Component | Status | Notes |
-|-----------|--------|-------|
-| Core Features | ✅ Complete | Dashboard, charts, file management |
-| Security | ✅ Complete | Helmet.js, rate limiting, logging |
-| Testing | ✅ Complete | Unit & E2E tests passing |
-| Documentation | ✅ Complete | 2,500+ lines of comprehensive docs |
-| CI/CD | ✅ Complete | GitHub Actions pipeline configured |
-| Deployment | ✅ Ready | AWS, DigitalOcean, Docker supported |
-| Production | ✅ Ready | All systems verified and tested |
+</div>
 
 ---
 
-**Last Updated**: 2026-06-28  
-**Version**: 1.0.0  
-**Status**: ✅ Production Ready
+## ✨ What This Does
 
-[🌐 Visit Repository](https://github.com/dais2026/lightning-energy-dashboard) | [📖 Read Docs](./API.md) | [🚀 Deploy Now](./DEPLOYMENT.md)
+Lightning Energy Dashboard is a professional solar battery storage comparison tool built for installers, consultants, and homeowners evaluating battery storage systems for Australian residential and commercial applications.
+
+**Interactive Battery Comparison** across 11 complete systems with 6 data-driven chart tabs — efficiency, power, cost, performance scoring, feature matrix, and warranty analysis.
+
+**Export Anywhere** — download the full comparison as CSV (Excel), JSON (API), or Markdown (reports) from the dashboard header.
+
+**Admin & Analytics** — system health monitoring, feature flag management, user activity, and comprehensive usage analytics with funnel, geographic, and device breakdowns.
+
+---
+
+## 🔋 11 Battery Systems — Fully Documented
+
+| # | System | Efficiency | Capacity | Cost/kWh | Warranty |
+|---|--------|------------|----------|----------|---------|
+| 1 | **Tesla Powerwall 3** | 97.5% | 13.5 kWh | $1,037 | 10 yr |
+| 2 | **Sigenergy SigenStor** | 95% | 5.2–7.8 kWh/module | $1,100 | 10 yr |
+| 3 | **Sungrow SBR Series** | 96% | 6.4–25.6 kWh | $850 | 10.5 yr |
+| 4 | **Anker Solix X1** | 94.5% | 5 kWh/module | $1,200 | 10 yr |
+| 5 | **Enphase IQ Battery 5P** | 89% | 5.0 kWh | $1,400 | **15 yr** |
+| 6 | **BYD Battery-Box Premium** | 96% | 5.1–22.1 kWh | $900 | 10 yr |
+| 7 | **Fronius Primo GEN24 Plus** | 96% | Scalable | $950 | 10 yr |
+| 8 | **Fronius Symo GEN24 Plus** | 97.9% | 6.3–15.8 kWh | $1,000 | 10 yr |
+| 9 | **FoxESS ECS Series** | 95% | 2.88–20.16 kWh | $800 | 10 yr |
+| 10 | **GoodWe GW8.3-BAT-D-G20** | **98%** | 8 kWh | $875 | 10 yr |
+| 11 | **GoodWe ESA Series** | 97% | 5–108 kWh | $820 | 10 yr |
+
+Each system includes: full specifications, company background, compatible inverters, feature matrix, manufacturer datasheets.
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone
+git clone https://github.com/dais2026/lightning-energy-dashboard.git
+cd lightning-energy-dashboard
+
+# Install (uses --legacy-peer-deps for Vite 7 compatibility)
+make install
+
+# Start dev server → http://localhost:3001
+make dev
+```
+
+> **Requires:** Node.js 18+ · npm 9+
+
+---
+
+## 🛠 All Commands
+
+```bash
+# Development
+make dev          # Start dev server (localhost:3001)
+make check        # TypeScript type-check (0 errors in strict mode)
+make test         # Run unit tests (5/5)
+make test-cov     # Tests with coverage report
+
+# Build
+make build        # Production build (~374 KB JS + lazy chunks)
+make analyze      # Interactive bundle visualizer (rollup-plugin-visualizer)
+make clean        # Remove dist/
+
+# Database
+make migrate      # Apply all pending SQL migrations
+make backup       # mysqldump with gzip + 30-day retention
+
+# Deployment
+make predeploy    # 10-point pre-deployment checklist
+make health       # Live server health check (/health, /metrics, tRPC)
+make deploy       # Full pipeline: check → test → build → predeploy
+```
+
+---
+
+## 📐 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19, Tailwind CSS 4, Recharts, shadcn/ui (60 components) |
+| Backend | Node.js, Express, tRPC 11 (end-to-end type safety) |
+| Database | MySQL 8 + Drizzle ORM |
+| Auth | Manus OAuth 2.0, session cookies |
+| Storage | AWS S3 + presigned URLs |
+| Testing | Vitest (unit), Playwright (E2E — 11 tests) |
+| Security | Helmet.js CSP, express-rate-limit (3 tiers), pino logging |
+| Build | Vite 7, ESBuild, code-split vendor chunks |
+| Monitoring | `/health` + `/metrics` endpoints, pino-http request logging |
+
+---
+
+## 📁 Project Structure
+
+```
+lightning-energy-dashboard/
+├── client/src/
+│   ├── pages/
+│   │   ├── Home.tsx          # Battery dashboard (743 lines)
+│   │   ├── FileStorage.tsx   # S3 file management
+│   │   ├── Admin.tsx         # Admin dashboard (4 tabs)
+│   │   └── Analytics.tsx     # Analytics module (5 tabs)
+│   ├── components/
+│   │   ├── BatteryModal.tsx  # Detailed battery specs
+│   │   ├── DashboardLayout.tsx
+│   │   └── ui/               # 60 shadcn/ui components
+│   └── lib/
+│       ├── batteryData.ts    # 11 complete battery specs (44 KB)
+│       └── exportUtils.ts    # CSV / JSON / Markdown export
+├── server/
+│   ├── _core/index.ts        # Express + security middleware
+│   ├── routers.ts            # tRPC procedures (auth, files, admin)
+│   ├── featureFlags.ts       # Feature flag system
+│   └── db.ts                 # Drizzle + MySQL2
+├── drizzle/
+│   ├── schema.ts             # Database schema
+│   └── migrations/           # 3 SQL migration files
+├── scripts/
+│   ├── health-check.sh       # Live endpoint monitoring
+│   ├── backup.sh             # Database backup
+│   ├── migrate.sh            # Migration runner
+│   └── pre-deploy-check.sh  # 10-point pre-deploy checklist
+├── tests/e2e/                # Playwright E2E tests (11 tests)
+├── Makefile                  # 14 developer shortcuts
+├── CHANGELOG.md              # Full version history
+└── .github/
+    ├── CI_WORKFLOW_TEMPLATE.yml  # CI/CD pipeline (activate below)
+    └── ISSUE_TEMPLATE/           # 5 issue templates
+```
+
+---
+
+## 📊 Dashboard Features
+
+### Main Dashboard (`/`)
+- **Battery Grid** — 11 cards with quick stats and click-to-expand modal
+- **Efficiency Tab** — Horizontal bar chart ranking 89%–98% efficiency
+- **Power Tab** — Dual bars: peak (kW) vs continuous power
+- **Cost Tab** — Cost/kWh + total cost side-by-side comparison
+- **Performance Tab** — Scatter plot: Peak Power vs Efficiency (bubble = cost)
+- **Features Tab** — Full feature matrix (inverter, 3-phase, EV, smart, high-power)
+- **Warranty Tab** — Warranty period comparison (10–15 years)
+- **Export Dropdown** — CSV / JSON / Markdown from the header
+
+### Analytics (`/analytics`)
+- KPI cards with period-over-period trend indicators
+- Daily active users area chart + session metrics
+- Top pages by views, avg time, bounce rate
+- Conversion funnel visualization (Visit → Browse → Interact → Convert)
+- Geographic distribution with growth metrics
+- Device breakdown pie chart (Desktop 62%, Mobile 31%, Tablet 7%)
+
+### Admin (`/admin`)
+- System health monitoring (6 real-time metric cards)
+- Feature flag management with rollout percentage controls
+- Active user list with online/offline status
+- System configuration (rate limits, log level, upload size)
+
+---
+
+## 🗄️ Database Migrations
+
+```bash
+# Set connection env vars
+export DB_HOST=localhost DB_NAME=lightning_energy DB_USER=root DB_PASS=secret
+
+# Run all pending migrations
+make migrate
+
+# Or with dry-run to preview
+bash scripts/migrate.sh --dry-run
+```
+
+Three migrations included:
+- `001_init.sql` — `users` + `files` tables with FK constraints
+- `002_add_analytics.sql` — `page_views`, `events`, `daily_stats`
+- `003_add_feature_flags.sql` — `feature_flags` + `feature_flag_overrides` (10 seeded flags)
+
+---
+
+## 🔒 Security
+
+- **Helmet.js** — HTTP security headers + Content Security Policy
+- **Rate Limiting** — 100/15min general · 30/15min mutations · 10/hr uploads
+- **Structured Logging** — pino + pino-http JSON request logs
+- **Input Validation** — Zod v4 schema validation on all tRPC inputs
+- **Session Security** — Secure, HTTP-only session cookies
+
+See [`SECURITY.md`](./SECURITY.md) for the full security guide.
+
+---
+
+## 🤝 Contributing
+
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for:
+- Development setup
+- Branch naming conventions
+- Code style guide
+- PR process and review standards
+- Test requirements
+
+---
+
+## ⚙️ Activating CI/CD
+
+The pipeline template is at `.github/CI_WORKFLOW_TEMPLATE.yml`. To activate:
+
+```bash
+# 1. Grant workflow scope (one-time)
+gh auth refresh --hostname github.com --scopes workflow
+
+# 2. Move template to active location
+mkdir -p .github/workflows
+cp .github/CI_WORKFLOW_TEMPLATE.yml .github/workflows/ci.yml
+git add .github/workflows/ci.yml && git push
+```
+
+The pipeline runs 4 jobs on every push to `main`:
+`test` (Node 18/20/22 matrix) → `code-quality` → `security` → `deploy`
+
+---
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [`API.md`](./API.md) | Complete tRPC endpoint reference |
+| [`ARCHITECTURE.md`](./ARCHITECTURE.md) | System design and data flows |
+| [`SECURITY.md`](./SECURITY.md) | Security guide and vulnerability prevention |
+| [`DEPLOYMENT.md`](./DEPLOYMENT.md) | AWS, DigitalOcean, Docker, Vercel |
+| [`CONTRIBUTING.md`](./CONTRIBUTING.md) | Developer contribution guide |
+| [`PERFORMANCE.md`](./PERFORMANCE.md) | Frontend/backend optimization |
+| [`CHANGELOG.md`](./CHANGELOG.md) | Full version history (v1.0.0 → v1.3.1) |
+
+---
+
+## 📄 License
+
+MIT © 2026 [Lightning Energy — George Fotopoulos](./LICENSE)
+
+---
+
+<div align="center">
+
+**Prepared by George Fotopoulos, Renewables Consultant**  
+Lightning Energy · 1 Waverley Road, Malvern East VIC 3145  
+📞 0419 574 520 · ✉️ george.f@lightning-energy.com.au
+
+*Professional solar battery storage solutions for residential and commercial applications*
+
+</div>

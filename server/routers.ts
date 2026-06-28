@@ -9,8 +9,75 @@ import { eq, desc } from "drizzle-orm";
 import { z } from "zod/v4";
 import { TRPCError } from "@trpc/server";
 
+// Admin Router
+const adminRouter = router({
+  // Get system health
+  getHealth: publicProcedure.query(async () => {
+    return {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      memory: process.memoryUsage(),
+      environment: process.env.NODE_ENV || 'development',
+    };
+  }),
+
+  // Get metrics
+  getMetrics: publicProcedure.query(async () => {
+    const memUsage = process.memoryUsage();
+    return {
+      memory: {
+        heapUsed: Math.round(memUsage.heapUsed / 1024 / 1024),
+        heapTotal: Math.round(memUsage.heapTotal / 1024 / 1024),
+        external: Math.round(memUsage.external / 1024 / 1024),
+      },
+      uptime: Math.round(process.uptime()),
+      timestamp: new Date().toISOString(),
+    };
+  }),
+
+  // Get system info
+  getSystemInfo: publicProcedure.query(async () => {
+    return {
+      version: '1.0.0',
+      node: process.version,
+      platform: process.platform,
+      uptime: Math.round(process.uptime()),
+      memory: process.memoryUsage(),
+    };
+  }),
+
+  // Get user activity logs (stub)
+  getUserActivity: publicProcedure
+    .input(z.object({ 
+      limit: z.number().default(50),
+      offset: z.number().default(0),
+    }))
+    .query(async ({ input }) => {
+      return {
+        activities: [],
+        total: 0,
+        limit: input.limit,
+        offset: input.offset,
+      };
+    }),
+
+  // Get system statistics
+  getStats: publicProcedure.query(async () => {
+    return {
+      totalUsers: 0,
+      totalFiles: 0,
+      apiRequests24h: 0,
+      errors24h: 0,
+      averageResponseTime: 0,
+    };
+  }),
+});
+
 export const appRouter = router({
   system: systemRouter,
+  admin: adminRouter,
+  
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     logout: publicProcedure.mutation(({ ctx }) => {
